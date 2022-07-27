@@ -7,10 +7,6 @@ name: ~Lib / Release
 on:
   workflow_call:
     inputs:
-      appName:
-        required: true
-        description: The application name
-        type: string
       targetBranch:
         required: false
         description: The target branch for the release being created
@@ -38,8 +34,7 @@ jobs:
       with:
         commitish: ${{ inputs.targetBranch }}
         config-name: workflows/configs/release-drafter.yaml
-        name: ${{ inputs.appName }}
         prerelease: ${{ inputs.prerelease }}
         publish: ${{ inputs.publish }}
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN_OPEN_SOURCE }}
