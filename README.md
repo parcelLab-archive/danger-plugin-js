@@ -19,6 +19,8 @@ Install:
 
 ```sh
 yarn add @parcellab/danger-plugin --dev
+# or
+npm i @parcellab/danger-plugin --save-dev
 ```
 
 At a glance:
@@ -28,10 +30,11 @@ At a glance:
 import parcellab from '@parcellab/danger-plugin';
 
 (async function dangerReport() {
-  const commitlintConfig = {
-    severity: 'warn',
-  };
-  await parcellab();
+  await parcellab({
+    conventional: {
+      severity: 'warn',
+    },
+  });
 })();
 ```
 
@@ -55,7 +58,6 @@ import parcellab from '@parcellab/danger-plugin';
     },
     prLint: {
       severity: 'message',
-      scoped: false,
     },
     jira: {
       severity: 'disabled',
@@ -74,9 +76,9 @@ import parcellab from '@parcellab/danger-plugin';
 | branchSize   | severity      | `warn`                                  | danger event type                              |
 | conventional | rules         | `@commitlint/config-conventional` rules | conventional commit rules to lint              |
 | conventional | severity      | `fail`                                  | danger event type                              |
-| prLint       | minBodyLength | `warn`                                  | minimum number of characters in the PR body    |
-| prLint       | severity      | `fail`                                  | danger event type                              |
 | jira         | severity      | `warn`                                  | danger event type                              |
+| prLint       | minBodyLength | `10`                                    | minimum number of characters in the PR body    |
+| prLint       | severity      | `fail`                                  | danger event type                              |
 
 ## Changelog
 

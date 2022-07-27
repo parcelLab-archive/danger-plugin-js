@@ -167,7 +167,7 @@ function checkJIRA({ severity = Severity.Warn }: JIRAConfig = {}) {
   if (!JIRA_REGEX.test(pr.title)) {
     dangerEvent(
       'Is this PR related to a JIRA issue?\n' +
-        'If so, link it at the end of the PR title, e.g. `feat(my-app): my description [MHP-XXXX]`. ' +
+        'If so, link it at the end of the PR title, e.g. `feat: my description [JIRA-XXXX]`. ' +
         'Therefore, the PR will be referenced in JIRA so everybody can see it.',
       severity
     );

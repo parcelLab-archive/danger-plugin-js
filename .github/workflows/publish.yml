@@ -8,61 +8,7 @@ on:
       version:
         description: The version to publish
         required: true
-env:
-  BOT_EMAIL: dev.bot@parcellab.com
-  BOT_NAME: parcellab-dev-bot
 jobs:
   publish:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout current git repository
-      uses: actions/checkout@v2
-      with:
-        persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of REPO_ACCESS_TOKEN_OPEN_SOURCE.
-        fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
-    - name: Install yarn dependencies
-      run: yarn install --immutable
-    - name: Use Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: 18.0.0
-    - name: Load version
-      id: load_version
-      run: |
-        if [ "$GITHUB_EVENT_NAME" = 'workflow_dispatch' ]
-        then
-          VERSION="${{ github.event.inputs.version }}"
-        else
-          if [ "$GITHUB_EVENT_NAME" = 'release' ]
-          then
-            TAG_NAME="${{ github.event.release.tag_name }}"
-          else
-            TAG_NAME="${{ github.ref }}"
-          fi
-          CLEAN_TAG=${TAG_NAME##*/}
-          VERSION=${CLEAN_TAG//v}
-        fi
-        echo "::set-output name=version::$VERSION"
-    - name: Run build
-      run: yarn build
-    - name: Update package.json version to ${{ steps.load_version.outputs.version }}
-      uses: mikefarah/yq@v4.9.0
-      with:
-        cmd: |
-          yq e '.version = "${{ steps.load_version.outputs.version }}"' -i package.json -j
-    - name: Commit new package.json version
-      run: |
-        git config --local user.email "${{ env.BOT_EMAIL }}"
-        git config --local user.name "${{ env.BOT_NAME }}"
-        git commit -m "chore: set version ${{ steps.load_version.outputs.version }} [skip ci]" -a
-    - name: Push changes to current git repository
-      uses: ad-m/github-push-action@v0.6.0
-      with:
-        github_token: ${{ secrets.REPO_ACCESS_TOKEN_OPEN_SOURCE }}
-        branch: main
-    - name: Publish NPM package
-      uses: JS-DevTools/npm-publish@v1
-      with:
-        access: public
-        package: ./package.json
-        token: ${{ secrets.NPM_TOKEN }}
+    if: github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/_npm-publish.yaml

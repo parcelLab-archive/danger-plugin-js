@@ -11,29 +11,11 @@ on:
   workflow_dispatch:
 jobs:
   test:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Use Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: 18.0.0
-    - name: Checkout current git repository
-      uses: actions/checkout@v2
-    - name: Install yarn dependencies
-      run: yarn install --immutable
-    - name: Run lint
-      run: yarn lint
-    - name: Run test
-      run: yarn test
+    uses: ./.github/workflows/_js.yaml
   draft-release:
     if: github.ref == 'refs/heads/main'
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-    - name: Create release
-      id: release-wizard
-      uses: darioblanco/release-wizard@main
-      with:
-        draft: false
-        token: ${{ github.token }}
-        pushTag: true
+    needs:
+    - test
+    uses: ./.github/workflows/_release.yaml
+    with:
+      appName: danger-plugin

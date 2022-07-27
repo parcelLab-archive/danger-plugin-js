@@ -1,3 +1,0 @@
-## :alien: $APP Changelog
-
-$CHANGES

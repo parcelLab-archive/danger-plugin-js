@@ -1,0 +1,98 @@
+name-template: 'v$RESOLVED_VERSION 🚀'
+tag-template: 'v$RESOLVED_VERSION'
+categories:
+  - title: '🚀 Features'
+    label: 'feat'
+  - title: '🐛 Bug Fixes'
+    label: 'fix'
+  - title: '🧰 Maintenance'
+    label: 'chore'
+  - title: '🧱 Build'
+    label: 'build'
+  - title: '🚥 Continuous Integration'
+    label: 'ci'
+  - title: '📗 Documentation'
+    label: 'docs'
+  - title: '🚅 Performance'
+    label: 'perf'
+  - title: '📝 Refactor'
+    label: 'refactor'
+  - title: '💅 Style'
+    label: 'style'
+  - title: '🧪 Test'
+    label: 'test'
+change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
+change-title-escapes: '\<*_&'
+version-resolver:
+  major:
+    labels:
+      - 'MAJOR'
+  minor:
+    labels:
+      - 'MINOR'
+  patch:
+    labels:
+      - 'PATCH'
+  default: patch
+template: |
+  ## Changes
+
+  $CHANGES
+
+  ## Contributors
+
+  $CONTRIBUTORS
+autolabeler:
+  - label: 'build'
+    branch:
+      - '/build\/.+/'
+    title:
+      - '/build/i'
+  - label: 'chore'
+    branch:
+      - '/chore\/.+/'
+    title:
+      - '/chore/i'
+  - label: 'ci'
+    branch:
+      - '/ci\/.+/'
+    title:
+      - '/ci/i'
+  - label: 'docs'
+    branch:
+      - '/docs\/.+/'
+    title:
+      - '/docs/i'
+  - label: 'feat'
+    branch:
+      - '/feat\/.+/'
+    title:
+      - '/feat/i'
+  - label: 'fix'
+    branch:
+      - '/fix\/.+/'
+    title:
+      - '/fix/i'
+  - label: 'perf'
+    branch:
+      - '/perf\/.+/'
+    title:
+      - '/perf/i'
+  - label: 'refactor'
+    branch:
+      - '/refactor\/.+/'
+    title:
+      - '/refactor/i'
+  - label: 'style'
+    branch:
+      - '/style\/.+/'
+    title:
+      - '/style/i'
+  - label: 'test'
+    branch:
+      - '/test\/.+/'
+    title:
+      - '/test/i'
+references:
+  - main
+  - v.+
