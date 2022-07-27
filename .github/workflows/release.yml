@@ -9,5 +9,4 @@ jobs:
     if: github.ref == 'refs/heads/main'
     uses: ./.github/workflows/_release.yaml
     with:
-      appName: danger-plugin
       publish: true

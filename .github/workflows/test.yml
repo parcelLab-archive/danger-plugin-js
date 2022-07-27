@@ -17,5 +17,3 @@ jobs:
     needs:
     - test
     uses: ./.github/workflows/_release.yaml
-    with:
-      appName: danger-plugin
