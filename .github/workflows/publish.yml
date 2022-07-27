@@ -47,8 +47,8 @@ jobs:
           yq e '.version = "${{ steps.load_version.outputs.version }}"' -i package.json -j
     - name: Commit new package.json version
       run: |
-        git config --local user.email "${{ inputs.botEmail }}"
-        git config --local user.name "${{ inputs.botName }}"
+        git config --local user.email "dev.bot@parcellab.com"
+        git config --local user.name "parcellab-dev-bot"
         git commit -m "chore: set version ${{ steps.load_version.outputs.version }} [skip ci]" -a
     - name: Push changes to current git repository
       uses: ad-m/github-push-action@v0.6.0
