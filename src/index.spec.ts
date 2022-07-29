@@ -49,8 +49,8 @@ describe('parcellab()', () => {
       pr: {
         additions: 200,
         deletions: 100,
-        body: 'My PR body that is longer than 10 characters. ![image](myimage.png)',
-        title: 'feat(my-app): my description [MHP-1234]',
+        body: 'My PR body that is longer than 10 characters. ![image](myimage.png) [JIRA-1234]',
+        title: 'feat(my-app): my description',
       },
     },
   };
@@ -100,7 +100,7 @@ describe('parcellab()', () => {
         ...danger.github,
         pr: {
           ...danger.github.pr,
-          body: 'Short',
+          body: '[JIR-1]',
         },
       },
     };
@@ -149,7 +149,7 @@ describe('parcellab()', () => {
         pr: {
           ...danger.github.pr,
           title:
-            'feat(my-app): my description is a very long description and it will fail[MHP-1234]',
+            'feat(my-app): my description is a very long description and it will fail long long',
         },
       },
     };
@@ -172,7 +172,7 @@ describe('parcellab()', () => {
         ...danger.github,
         pr: {
           ...danger.github.pr,
-          title: 'feat(my-app): My description is upper case [MHP-1234]',
+          title: 'feat(my-app): My description is upper case',
         },
       },
     };
@@ -194,7 +194,7 @@ describe('parcellab()', () => {
         ...danger.github,
         pr: {
           ...danger.github.pr,
-          title: 'feat: my description [MHP-1234]',
+          title: 'feat: my description',
         },
       },
     };
@@ -215,7 +215,7 @@ describe('parcellab()', () => {
         ...danger.github,
         pr: {
           ...danger.github.pr,
-          title: 'feat: my description',
+          body: 'my description without JIRA ticket',
         },
       },
     };

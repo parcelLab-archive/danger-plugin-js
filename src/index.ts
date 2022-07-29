@@ -163,11 +163,11 @@ function lintPR({
 
 function checkJIRA({ severity = Severity.Warn }: JIRAConfig = {}) {
   const { pr } = danger.github;
-  const JIRA_REGEX = /([A-Z]{3}-\d{4})/;
-  if (!JIRA_REGEX.test(pr.title)) {
+  const JIRA_REGEX = /([A-Z]{3}-\d)/;
+  if (!JIRA_REGEX.test(pr.body)) {
     dangerEvent(
       'Is this PR related to a JIRA issue?\n' +
-        'If so, link it at the end of the PR title, e.g. `feat: my description [JIRA-XXXX]`. ' +
+        'If so, link it in the PR body, e.g. `[JIRA-XXXX]`. ' +
         'Therefore, the PR will be referenced in JIRA so everybody can see it.',
       severity
     );
