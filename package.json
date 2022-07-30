@@ -1,6 +1,6 @@
 {
   "name": "@parcellab/danger-plugin",
-  "version": "v0.0.14",
+  "version": "0.0.16",
   "description": "Set of Danger rules used in parcelLab PRs",
   "author": "engineering@parcellab.com",
   "repository": {
