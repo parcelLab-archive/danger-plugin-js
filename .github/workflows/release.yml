@@ -1,8 +1,6 @@
 name: Release
 on:
-  push:
-    branches:
-    - main
+  # Directly publish a new release manually
   workflow_dispatch:
 jobs:
   release:
