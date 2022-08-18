@@ -58,14 +58,6 @@ jobs:
         github_token: ${{ secrets.REPO_ACCESS_TOKEN_OPEN_SOURCE }}
         branch: main
         force: true
-    - name: Use Node.js with NPM default registry
-      uses: actions/setup-node@v3
-      with:
-        registry-url: https://registry.npmjs.org
-    - name: Publish package to NPM default registry
-      run: npm publish
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
     - name: Use Node.js with Github Packages registry
       uses: actions/setup-node@v3
       with:
@@ -75,3 +67,11 @@ jobs:
       run: npm publish
       env:
         NODE_AUTH_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN_OPEN_SOURCE }}
+    - name: Use Node.js with NPM default registry
+      uses: actions/setup-node@v3
+      with:
+        registry-url: https://registry.npmjs.org
+    - name: Publish package to NPM default registry
+      run: npm publish
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
