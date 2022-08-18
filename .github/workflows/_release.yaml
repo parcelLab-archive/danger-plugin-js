@@ -24,17 +24,12 @@ on:
         type: boolean
 jobs:
   release:
-    permissions:
-      contents: write  # for release-drafter/release-drafter to create a github release
-      pull-requests: write  # for release-drafter/release-drafter to add label to PR
     runs-on: ubuntu-latest
     steps:
-    - name: Create Github release
-      uses: release-drafter/release-drafter@v5
-      with:
-        commitish: ${{ inputs.targetBranch }}
-        config-name: workflows/configs/release-drafter.yaml
-        prerelease: ${{ inputs.prerelease }}
-        publish: ${{ inputs.publish }}
-      env:
-        GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN_OPEN_SOURCE }}
+      - name: Create Github release
+        uses: darioblanco/release-wizard@v2.0.1
+        with:
+          draft: ${{ !inputs.publish }}
+          prerelease: ${{ inputs.prerelease }}
+          token: ${{ secrets.REPO_ACCESS_TOKEN_OPEN_SOURCE }}
+          templatePath: workflows/configs/release-wizard.md
