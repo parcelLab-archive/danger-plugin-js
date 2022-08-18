@@ -6,6 +6,4 @@ jobs:
   release:
     if: github.ref == 'refs/heads/main'
     uses: ./.github/workflows/_release.yaml
-    with:
-      publish: true
     secrets: inherit
