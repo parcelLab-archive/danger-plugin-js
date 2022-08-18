@@ -65,7 +65,7 @@ jobs:
         scope: '@parcellab'
     - name: Publish NPM package to Github Packages registry
       continue-on-error: true
-      run: npm publish
+      run: npm publish --access public
       env:
         NODE_AUTH_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN_OPEN_SOURCE }}
     - name: Use Node.js with NPM default registry
