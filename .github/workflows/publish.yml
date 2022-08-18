@@ -18,7 +18,7 @@ jobs:
         persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of REPO_ACCESS_TOKEN_OPEN_SOURCE.
         fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
     - name: Use Node.js
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v3
     - name: Install npm dependencies
       run: npm i
     - name: Load version
@@ -56,9 +56,20 @@ jobs:
         github_token: ${{ secrets.REPO_ACCESS_TOKEN_OPEN_SOURCE }}
         branch: main
         force: true
-    - name: Publish NPM package
-      uses: JS-DevTools/npm-publish@v1
+    - name: Use Node.js with NPM default registry
+      uses: actions/setup-node@v3
       with:
-        access: public
-        package: ./package.json
-        token: ${{ secrets.NPM_TOKEN }}
+        registry-url: https://registry.npmjs.org
+    - name: Publish package to NPM default registry
+      run: npm publish
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+    - name: Use Node.js with Github Packages registry
+      uses: actions/setup-node@v3
+      with:
+        registry-url: https://npm.pkg.github.com
+        scope: '@parcellab'
+    - name: Publish NPM package to Github Packages registry
+      run: npm publish
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN_OPEN_SOURCE }}
