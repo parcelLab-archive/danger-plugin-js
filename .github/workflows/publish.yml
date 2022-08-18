@@ -71,6 +71,7 @@ jobs:
       uses: actions/setup-node@v3
       with:
         registry-url: https://registry.npmjs.org
+        scope: '@parcellab'
     - name: Publish package to NPM default registry
       run: npm publish
       env:
