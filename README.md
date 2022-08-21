@@ -1,5 +1,7 @@
 # @parcellab/danger-plugin
 
+[![Publish](https://github.com/parcelLab/danger-plugin-js/actions/workflows/publish.yaml/badge.svg)](https://github.com/parcelLab/danger-plugin-js/actions/workflows/publish.yaml) [![Test](https://github.com/parcelLab/danger-plugin-js/actions/workflows/test.yaml/badge.svg)](https://github.com/parcelLab/danger-plugin-js/actions/workflows/test.yaml)
+
 Set of Danger rules used to check PRs in JavaScript/TypeScript codebases.
 
 This plugin allows configuration for the following events:
