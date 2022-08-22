@@ -12,9 +12,10 @@ on:
 jobs:
   test:
     uses: ./.github/workflows/_js.yaml
-  draft-release:
+  release:
     if: github.ref == 'refs/heads/main'
-    needs:
-    - test
+    needs: test
     uses: ./.github/workflows/_release.yaml
+    with:
+      draft: false
     secrets: inherit

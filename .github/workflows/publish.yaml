@@ -1,26 +1,19 @@
 name: Publish
 on:
-  release:
-    types:
-    - published
+  push:
+    tags:
+      - "v*"
   workflow_dispatch:
     inputs:
       version:
         description: The version to publish (e.g. 1.0.0)
         required: true
 jobs:
-  publish:
+  version:
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.load_version.outputs.version }}
     steps:
-    - name: Checkout current git repository
-      uses: actions/checkout@v2
-      with:
-        persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of REPO_ACCESS_TOKEN_OPEN_SOURCE.
-        fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
-    - name: Use Node.js
-      uses: actions/setup-node@v3
-    - name: Install npm dependencies
-      run: npm i
     - name: Load version
       id: load_version
       run: |
@@ -38,42 +31,12 @@ jobs:
           VERSION=${CLEAN_TAG//v}
         fi
         echo "::set-output name=version::$VERSION"
-    - name: Run build
-      run: npm run build
-    - name: Update package.json version to ${{ steps.load_version.outputs.version }}
-      uses: mikefarah/yq@v4.26.1
-      with:
-        cmd: |
-          yq e '.version = "${{ steps.load_version.outputs.version }}"' -i package.json -j
-    - name: Commit new package.json version
-      continue-on-error: true
-      run: |
-        git config --local user.email "dev.bot@parcellab.com"
-        git config --local user.name "parcellab-dev-bot"
-        git commit -m "chore: set version ${{ steps.load_version.outputs.version }} [skip ci]" -a
-    - name: Push changes to current git repository
-      if: success()
-      uses: ad-m/github-push-action@v0.6.0
-      with:
-        github_token: ${{ secrets.REPO_ACCESS_TOKEN_OPEN_SOURCE }}
-        branch: main
-        force: true
-    - name: Use Node.js with Github Packages registry
-      uses: actions/setup-node@v3
-      with:
-        registry-url: https://npm.pkg.github.com
-        scope: '@parcellab'
-    - name: Publish NPM package to Github Packages registry
-      continue-on-error: true
-      run: npm publish --access public
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN_OPEN_SOURCE }}
-    - name: Use Node.js with NPM default registry
-      uses: actions/setup-node@v3
-      with:
-        registry-url: https://registry.npmjs.org
-        scope: '@parcellab'
-    - name: Publish package to NPM default registry
-      run: npm publish
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+  publish:
+    needs: version
+    uses: ./.github/workflows/_npm-publish.yaml
+    with:
+      access: public
+      version: ${{ needs.version.outputs.version }}
+    secrets:
+      githubAuthToken: ${{ secrets.REPO_ACCESS_TOKEN_OPEN_SOURCE }}
+      npmjsAuthToken: ${{ secrets.NPM_TOKEN }}
