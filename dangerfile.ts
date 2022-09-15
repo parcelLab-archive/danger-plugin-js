@@ -1,5 +1,4 @@
-import parcellab from "./src";
-import { Severity } from "./src/types";
+import parcellab, { Severity } from ".";
 
 (void async function dangerReport() {
 	await parcellab({

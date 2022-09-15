@@ -3,7 +3,7 @@ import { rules as conventionalCommitRules } from "@commitlint/config-conventiona
 import { QualifiedRules } from "@commitlint/types";
 
 // This import is terrible but that is how the Danger plugin creator sets it
-import { DangerDSLType } from "../node_modules/danger/distribution/dsl/DangerDSL";
+import { DangerDSLType } from "danger/distribution/dsl/DangerDSL";
 import {
 	BranchSizeConfig,
 	Config,

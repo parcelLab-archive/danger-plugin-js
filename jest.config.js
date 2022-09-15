@@ -1,6 +1,6 @@
 module.exports = {
 	clearMocks: true,
-	collectCoverageFrom: ["<rootDir>/src/**/*.ts"],
+	collectCoverageFrom: ["<rootDir>/lib/**/*.ts"],
 	coverageReporters: process.env.GITHUB_ACTIONS
 		? ["lcovonly", "text"]
 		: ["html", "json-summary", "lcov", "text"],
@@ -21,7 +21,7 @@ module.exports = {
 	reporters: ["default"],
 	rootDir: ".",
 	testEnvironment: require.resolve("jest-environment-node"),
-	testMatch: ["<rootDir>/src/**/*.spec.ts"],
+	testMatch: ["<rootDir>/test/**/*.spec.ts"],
 	transform: {
 		"^.+\\.ts?$": "ts-jest",
 	},

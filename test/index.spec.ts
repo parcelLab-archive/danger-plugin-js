@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import parcellab from "./index";
-import { Severity } from "./types";
+import parcellab from "../lib/plugin";
+import { Severity } from "../lib/types";
 
 // type DangerLog = (message: string) => void | undefined;
 
