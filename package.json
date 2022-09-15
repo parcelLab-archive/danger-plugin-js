@@ -19,7 +19,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc -b tsconfig.build.json",
+    "build": "tsc",
     "commitlint": "commitlint -x @commitlint/config-conventional --edit",
     "format": "prettier --write --ignore-unknown .",
     "lint:commit": "commitlint -x @commitlint/config-conventional --edit",

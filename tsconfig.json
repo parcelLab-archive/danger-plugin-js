@@ -1,12 +1,14 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "commonjs",
     "allowJs": false,
+    "baseUrl": ".",
+    "declaration": true,
     "esModuleInterop": true,
+    "module": "commonjs",
+    "outDir": "dist",
     "pretty": true,
     "strictNullChecks": true,
-    "declaration": true
+    "target": "esnext"
   },
   "lib": ["es2017"],
   "include": ["lib", "test", "index.ts"]
