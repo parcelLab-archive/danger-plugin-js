@@ -54,11 +54,13 @@ jobs:
           cmd: |
             yq e '.version = "${{ needs.version.outputs.version }}"' -i package.json -j
       - name: Commit new package.json version
+        continue-on-error: true
         run: |
           git config --local user.email "${{ env.BOT_EMAIL }}"
           git config --local user.name "${{ env.BOT_NAME }}"
           git commit -m "chore: set version ${{ needs.version.outputs.version }} [skip ci]" -a
       - name: Push changes to current git repository
+        continue-on-error: true
         uses: ad-m/github-push-action@v0.6.0
         with:
           github_token: ${{ secrets.REPO_ACCESS_TOKEN_OPEN_SOURCE }}
