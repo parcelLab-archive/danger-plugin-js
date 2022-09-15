@@ -23,6 +23,7 @@
     "commitlint": "commitlint -x @commitlint/config-conventional --edit",
     "format": "prettier --write --ignore-unknown .",
     "lint:commit": "commitlint -x @commitlint/config-conventional --edit",
+    "lint:eslint": "eslint .",
     "lint:prettier": "prettier --check --ignore-unknown .",
     "lint:staged": "lint-staged",
     "lint:types": "tsc --noEmit",
