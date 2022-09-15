@@ -29,12 +29,12 @@ At a glance:
 
 ```js
 // dangerfile.js
-import parcellab from '@parcellab/danger-plugin';
+import parcellab from "@parcellab/danger-plugin";
 
 (async function dangerReport() {
   await parcellab({
     conventional: {
-      severity: 'warn',
+      severity: "warn",
     },
   });
 })();
@@ -44,25 +44,25 @@ To override some default parameters:
 
 ```js
 // dangerfile.js
-import configLernaScopes from '@commitlint/config-lerna-scopes';
-import parcellab from '@parcellab/danger-plugin';
+import configLernaScopes from "@commitlint/config-lerna-scopes";
+import parcellab from "@parcellab/danger-plugin";
 
 (async function dangerReport() {
   await parcellab({
     branchSize: {
       maxCommits: 20,
       maxFiles: 200,
-      severity: 'fail',
+      severity: "fail",
     },
     conventional: {
       rules: configLernaScopes.rules,
-      severity: 'warn',
+      severity: "warn",
     },
     prLint: {
-      severity: 'message',
+      severity: "message",
     },
     jira: {
-      severity: 'disabled',
+      severity: "disabled",
     },
   });
 })();
