@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`parcellab() Messages if everything is fine 1`] = `
-Array [
+[
   "
 ## Changes
 
@@ -39,7 +39,7 @@ Consider using a scope for more grained results.
 `;
 
 exports[`parcellab() Removes duplicates from same commit type 1`] = `
-Array [
+[
   "
 ## Changes
 
