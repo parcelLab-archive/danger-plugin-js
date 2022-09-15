@@ -20,9 +20,14 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc -b tsconfig.build.json",
-    "lint": "eslint ./src/**/*.ts",
+    "commitlint": "commitlint -x @commitlint/config-conventional --edit",
+    "format": "prettier --write --ignore-unknown .",
     "lint:commit": "commitlint -x @commitlint/config-conventional --edit",
-    "prepare": "is-ci || husky install",
+    "lint:prettier": "prettier --check --ignore-unknown .",
+    "lint:staged": "lint-staged",
+    "lint:types": "tsc --noEmit",
+    "lint": "npm run lint:types && npm run lint:eslint && npm run lint:prettier",
+    "prepare": "test \"$NODE_ENV\" = production || is-ci || husky install",
     "test": "jest --coverage"
   },
   "license": "MIT",

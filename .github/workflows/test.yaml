@@ -5,9 +5,11 @@ on:
     - main
     paths:
     - "*.js"
+    - "package.json"
   pull_request:
     paths:
     - "*.js"
+    - "package.json"
   workflow_dispatch:
 jobs:
   test:
