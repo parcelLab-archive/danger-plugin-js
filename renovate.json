@@ -1,12 +1,12 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:base"],
+  "extends": ["config:base", "group:all", "schedule:weekly"],
   "branchPrefix": "chore/renovate/",
   "commitBodyTable": true,
   "commitMessageAction": "Pin",
   "commitMessageExtra": "{{#if isMajor}}v{{{newMajor}}}{{else}}{{#if isSingleVersion}}v{{{newVersion}}}{{else}}{{{newValue}}}{{/if}}{{/if}}",
   "commitMessageTopic": "{{depName}}",
-  "enabledManagers": ["nodenv", "npm", "nvm", "regex"],
+  "enabledManagers": ["npm"],
   "packageRules": [
     {
       "commitMessageSuffix": "dev",
